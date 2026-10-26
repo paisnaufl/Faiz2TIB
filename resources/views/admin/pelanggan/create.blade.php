@@ -294,13 +294,19 @@
                                     <!-- First Name -->
                                     <div class="mb-3">
                                         <label for="first_name" class="form-label">First name</label>
-                                        <input type="text" id="first_name" class="form-control" name="first_name" required>
+                                        <input type="text" id="first_name" class="form-control" name="first_name">
+                                        @error('first_name')
+                                            <span style="color: red;">{{ $message }}</span>
+                                        @enderror
                                     </div>
 
                                     <!-- Last Name -->
                                     <div class="mb-3">
                                         <label for="last_name" class="form-label">Last name</label>
-                                        <input type="text" id="last_name" class="form-control" name="last_name" required>
+                                        <input type="text" id="last_name" class="form-control" name="last_name" >
+                                        @error('last_name')
+                                            <span style="color: red;">{{ $message }}</span>
+                                        @enderror
                                     </div>
                                 </div>
 
@@ -327,7 +333,7 @@
                                     <!-- Email -->
                                     <div class="mb-3">
                                         <label for="email" class="form-label">Email</label>
-                                        <input type="text" id="email" class="form-control" name="email" required>
+                                        <input type="text" id="email" class="form-control" name="email" >
                                     </div>
 
                                     <!-- Phone -->

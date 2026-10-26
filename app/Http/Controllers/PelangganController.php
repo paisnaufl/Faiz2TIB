@@ -29,7 +29,15 @@ class PelangganController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request->all());
+        $request->validate([
+        'first_name' => 'required|string',
+        'last_name'  => 'required|string',
+        'birthday'   => 'required|date',
+        'gender'     => 'required|in:Male,Female,Other',
+        'email'      => 'required|email',
+        'phone'      => 'required|numeric',
+    ]);
+
         $data['first_name'] = $request->first_name;
 		$data['last_name'] = $request->last_name;
 		$data['birthday'] = $request->birthday;
@@ -64,6 +72,15 @@ class PelangganController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        $request->validate([
+        'first_name' => 'required|string',
+        'last_name'  => 'required|string',
+        'birthday'   => 'required|date',
+        'gender'     => 'required|in:Male,Female,Other',
+        'email'      => 'required|email',
+        'phone'      => 'required|numeric',
+    ]);
+
         $pelanggan_id = $id;
         $pelanggan = Pelanggan::findOrFail($pelanggan_id);
 
