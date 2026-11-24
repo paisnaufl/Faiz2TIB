@@ -13,6 +13,9 @@ class UserController extends Controller
      */
     public function index()
     {
+        if(!Auth::check()){
+			return redirect()->route('auth.login');
+		}
         $data['dataUser'] = User::all();
 		return view('admin.user.index',$data);
     }

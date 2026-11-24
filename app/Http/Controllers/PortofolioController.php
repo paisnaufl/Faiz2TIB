@@ -13,6 +13,9 @@ class PortofolioController extends Controller
      */
     public function index()
     {
+        if(!Auth::check()){
+			return redirect()->route('auth.login');
+		}
         $data['dataPortofolio'] = Portofolio::all();
 		return view('admin.portofolio.index',$data);
     }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Pelanggan;
 
 class PelangganController extends Controller
@@ -12,6 +13,9 @@ class PelangganController extends Controller
      */
     public function index(Request $request)
     {
+        if(!Auth::check()){
+			return redirect()->route('auth.login');
+		}
         $fillterableColumns = ['gender'];
         $searchableColumns = ['first_name', 'last_name', 'email', 'phone'];
         $pagedata['dataPelanggan'] = Pelanggan::filter($request, $fillterableColumns)->search($request, $searchableColumns)->paginate(10)->withQueryString();
