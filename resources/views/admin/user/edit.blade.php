@@ -40,6 +40,19 @@
                                         <label for="first_name" class="form-label">Name</label>
                                         <input type="text" id="name" class="form-control" name="name" value="{{$dataUser->name}}" required>
                                     </div>
+
+                                    <!-- Role (tambahan langkah 2) -->
+                                    <div class="mb-3">
+                                        <label for="role" class="form-label">Role</label>
+                                        <select class="form-select" id="role" name="role">
+                                            <option value="Super Admin" {{ $dataUser->role == 'Super Admin' ? 'selected' : '' }}>Super Admin</option>
+                                            <option value="Pelanggan" {{ $dataUser->role == 'Pelanggan' ? 'selected' : '' }}>Pelanggan</option>
+                                            <option value="Mitra" {{ $dataUser->role == 'Mitra' ? 'selected' : '' }}>Mitra</option>
+                                        </select>
+                                        @error('role')
+                                            <span style="color: red;">{{ $message }}</span>
+                                        @enderror
+                                    </div>
                                 </div>
 
                                 <div class="col-lg-4 col-sm-6">

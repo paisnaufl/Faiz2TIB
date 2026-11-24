@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -37,11 +38,13 @@ class UserController extends Controller
         'name' => 'required|string',
         'email'  => 'required|email',
         'password'   => 'required|string',
+        'role'   => 'required|string',
     ]);
 
         $data['name'] = $request->name;
 		$data['email'] = $request->email;
 		$data['password'] = Hash::make($request->string);
+		$data['role'] = $request->role;
 
 		User::create($data);
 
@@ -74,6 +77,7 @@ class UserController extends Controller
         'name' => 'required|string',
         'email'      => 'required|email',
         'password'      => 'required|string',
+        'role'      => 'required|string',
     ]);
 
         $user_id = $id;
@@ -82,6 +86,7 @@ class UserController extends Controller
         $user->name = $request->name;
         $user->email = $request->email;
         $user->password = hash::make($request->password);
+        $user->role = $request->role;
 
         $user->save();
         return redirect()->route('user.index')->with('success','Perubahan Akun Berhasil!');

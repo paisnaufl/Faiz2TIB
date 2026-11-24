@@ -41,6 +41,19 @@
                                             <span style="color: red;">{{ $message }}</span>
                                         @enderror
                                     </div>
+
+                                    <!-- Role (tambahan langkah 2) -->
+                                    <div class="mb-3">
+                                        <label for="role" class="form-label">Role</label>
+                                        <select class="form-select" id="role" name="role">
+                                            <option value="Super Admin">Super Admin</option>
+                                            <option value="Pelanggan">Pelanggan</option>
+                                            <option value="Mitra">Mitra</option>
+                                        </select>
+                                        @error('role')
+                                            <span style="color: red;">{{ $message }}</span>
+                                        @enderror
+                                    </div>
                                 </div>
 
                                 <div class="col-lg-4 col-sm-6">

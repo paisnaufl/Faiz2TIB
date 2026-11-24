@@ -13,23 +13,35 @@ use App\Http\Controllers\AuthController;
 //     return view('welcome');
 // });
 
-Route::get('/', [HomeController::class,'index']);
-
-Route::post('question/store', [QuestionController::class, 'store'])
-		->name('question.store');
-
-Route::get('dashboard', [DashboardController::class, 'index'])
-        ->name('dashboard');
-
-Route::resource('pelanggan', PelangganController::class);
-
-Route::resource('portofolio', PortofolioController::class);
-
-Route::resource('user', UserController::class);
-
-
 Route::get('/login', [AuthController::class, 'index'])->name('login');
 Route::post('/login', [AuthController::class, 'login'])->name('auth.login');
 Route::post('/logout', [AuthController::class, 'logout'])
     ->middleware('auth')
     ->name('auth.logout');
+
+Route::group(['middleware'=>['checkislogin']],function(){
+    Route::get('dashboard', [DashboardController::class, 'index'])
+            ->name('dashboard');
+
+    Route::resource('pelanggan', PelangganController::class);
+
+    Route::resource('portofolio', PortofolioController::class);
+
+    Route::resource('user', UserController::class);
+
+    Route::get('/', [HomeController::class,'index']);
+
+    Route::post('question/store', [QuestionController::class, 'store'])
+            ->name('question.store');
+});
+
+Route::middleware(['auth'])->group(function () {
+    Route::middleware(['checkrole:Super Admin'])->group(function () {
+        Route::resource('user', UserController::class);
+    });
+
+    Route::middleware(['checkrole:Super Admin,mitra'])->group(function () {
+        Route::resource('pelanggan', PelangganController::class);
+    });
+});
+
